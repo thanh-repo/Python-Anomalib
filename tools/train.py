@@ -19,11 +19,6 @@ from anomalib.data import get_datamodule
 from anomalib.models import get_model
 from anomalib.utils.callbacks import LoadModelCallback, get_callbacks
 from anomalib.utils.loggers import configure_logger, get_experiment_logger
-from anomalib.data.folder import Folder, FolderDataset
-from anomalib.pre_processing import PreProcessor
-import numpy as np
-from PIL import Image
-from torchvision.transforms import ToPILImage
 
 logger = logging.getLogger("anomalib")
 
@@ -35,7 +30,7 @@ def get_args() -> Namespace:
         Namespace: List of arguments.
     """
     parser = ArgumentParser()
-    parser.add_argument("--model", type=str, default="padim", help="Name of the algorithm to train/test")
+    parser.add_argument("--model", type=str, default="ganomaly", help="Name of the algorithm to train/test")
     parser.add_argument("--config", type=str, required=False, help="Path to a model config file")
     parser.add_argument("--log-level", type=str, default="INFO", help="<DEBUG, INFO, WARNING, ERROR>")
 
@@ -43,22 +38,9 @@ def get_args() -> Namespace:
     return args
 
 
-def data_process():
-    pre_process = PreProcessor(image_size=256, to_tensor=True)
-    folder_dataset_classification_train = FolderDataset(
-        normal_dir="datasets/surface_crack/good",
-        abnormal_dir="datasets/surface_crack/bad",
-        split="train",
-        pre_process=pre_process,
-    )
-    folder_dataset_classification_train.samples.head()
-
-
 def train():
     """Train an anomaly classification or segmentation model based on a provided configuration file."""
     args = get_args()
-    args.model = "ganomaly"
-    args.log_level = "ERROR"
     args.config = "../anomalib/models/ganomaly/config.yaml"
     configure_logger(level=args.log_level)
 
@@ -88,4 +70,3 @@ def train():
 
 if __name__ == "__main__":
     train()
-    # data_process()

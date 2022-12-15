@@ -67,8 +67,8 @@ def _prepare_files_labels(
 
     if isinstance(extensions, str):
         extensions = (extensions,)
-
-    filenames = [f for f in path.glob(r"**/*") if f.suffix in extensions and not f.is_dir()]
+    glob_ex = path.glob(r"**/*")
+    filenames = [f for f in path.glob("*.jpg")]
     if len(filenames) == 0:
         raise RuntimeError(f"Found 0 {path_type} images in {path}")
 

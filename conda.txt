@@ -1,0 +1,19 @@
+conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -y anaconda pandas
+conda install -c conda-forge albumentations
+conda install -y conda-forge kornia
+conda install -y conda-forge pytorch-lightning
+conda install -y conda-forge timm
+conda install -y conda-forge imgaug
+conda install -y conda-forge jsonargparse
+conda install -y conda-forge wandb
+conda install -y conda-forge matplotlib
+pip install opencv-python
+conda install -y conda-forge omegaconf
+conda install -c conda-forge einops
+
+
+
+
+
+
